@@ -1,0 +1,2 @@
+datos/NoMontyHall.csv filter=lfs diff=lfs merge=lfs -text
+datos/alturas.csv filter=lfs diff=lfs merge=lfs -text
