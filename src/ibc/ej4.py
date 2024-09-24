@@ -16,9 +16,14 @@ def modelo_biologico(X):
   return bio
 
 def modelo_grupos(X):
-  rand = np.ones((len(X), 3))
-  rand[:, 1] = X['altura_madre']
-  rand[:, 2] = X['id'] % (X['id'].max() / 2)
+  groups = int(X['id'].max() / 2)
+  rand = np.ones((len(X), 1 + groups))
+  rand[:, 0] = X['altura_madre']
+  
+  for i in range(groups):
+    x = np.zeros(X.shape[0])
+    x[i] = x[i + groups] = 1
+    rand[:, 1 + i] = x
   return rand
 
 X = pd.read_csv('alturas.csv')
