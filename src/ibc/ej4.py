@@ -21,30 +21,30 @@ def modelo_grupos(X):
   rand[:, 2] = X['id'] % (X['id'].max() / 2)
   return rand
 
-X = pd.read_csv('datos/alturas.csv')
+X = pd.read_csv('alturas.csv')
 
 base = modelo_base(X)
 bio = modelo_biologico(X)
 rand = modelo_grupos(X)
 
-plt.bar(['base', 'bio', 'rand'], [log_evidence(X['altura'], base), log_evidence(X['altura'], bio), log_evidence(X['altura'], rand)], color=plt.color_sequences['tab10'])
-plt.show()
+#plt.bar(['base', 'bio', 'rand'], [log_evidence(X['altura'], base), log_evidence(X['altura'], bio), log_evidence(X['altura'], rand)], color=plt.color_sequences['tab10'])
+#plt.show()
 
 def geom_mean(y, M):
   return np.exp(log_evidence(y, M) / len(y))
 
-#plt.bar(['base', 'bio', 'rand'], [geom_mean(X['altura'], base), geom_mean(X['altura'], bio), geom_mean(X['altura'], rand)], color=plt.color_sequences['tab10'])
-#plt.show()
+plt.bar(['base', 'bio', 'rand'], [geom_mean(X['altura'], base), geom_mean(X['altura'], bio), geom_mean(X['altura'], rand)], color=plt.color_sequences['tab10'])
+plt.show()
 
 def pM(m):
   return 1/3
 
 def pDatos(y):
   modelos = [base, bio, rand]
-  return sum((np.exp(log_evidence(y, m)) * pM(m) for m in modelos))
+  return sum((pDatos_M(y,m) * pM(m) for m in modelos))
 
 def pDatos_M(y,m):
-  return np.exp(log_evidence(y,m))
+  return np.exp(log_evidence(y,m) / len(y))
 
 def pM_Datos(y, m):
   return pDatos_M(y,m) * pM(m) / pDatos(y)
