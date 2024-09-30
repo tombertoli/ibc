@@ -140,6 +140,9 @@ def m0_MAP(datos):
   return list(zip(hxs, phxs))
 
 if __name__ == '__main__':
-  diagM0 = gen_diagnosticos_M0()
-  np.save('M0_diags', diagM0)
+  #diagM0 = gen_diagnosticos_M0()
+  #np.save('M0_diags', diagM0)
   #print(m0_MAP(diagM0[0, :, 0].ravel()))
+
+  diagM1 = gen_diagnosticos_M1()
+  np.save('M1_diags', diagM1)
