@@ -11,8 +11,16 @@ dependencies = [
     "statsmodels>=0.14.2",
     "pymc>=5.15.0",
     "arviz>=0.19.0",
+    "linear-model",
 ]
 
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
+
+[tool.pyright]
+venvPath = "."
+venv = ".venv"
+
+[tool.uv.sources]
+linear-model = { path = "../bayesian-linear-model" }
